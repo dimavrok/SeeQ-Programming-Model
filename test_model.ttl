@@ -1,0 +1,188 @@
+    @prefix apar: <http://openmetrics.eu/openmetrics/apar#> .
+    @prefix bdp: <https://brickschema.org/schema/Brick/DiscoveryPath#> .
+    @prefix brick: <https://brickschema.org/schema/Brick#> .
+    @prefix sh: <http://www.w3.org/ns/shacl#> .
+    @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+    @prefix om: <http://openmetrics.eu/openmetrics#> .
+    @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+    @prefix schema: <http://schema.org/> .
+    @prefix owl: <http://www.w3.org/2002/07/owl#> .
+    @prefix ref: <https://brickschema.org/schema/Brick/ref#> .
+    @prefix gcq: <https://brickschema.org/schema/Brick/GraphCQ#> .
+
+    om:AHU a brick:AHU ;
+        brick:feeds om:Zone ;
+        brick:hasPart om:Cooling_Coil,
+            om:Outdoor_Air_Damper,
+            om:Return_Air_Fan,
+            om:Supply_Air_Fan ,
+            om:Heating_Coil ;
+        brick:hasPoint om:MA_TEMP,
+            om:OA_CFM,
+            om:OA_TEMP,
+            om:RA_CFM,
+            om:RA_TEMP,
+            om:SA_CFM,
+            om:SA_SP,
+            om:SA_SPSPT,
+            om:SA_TEMP,
+            om:SA_TEMPSPT,
+            om:SYS_CTL .
+
+    om:Heating_Coil a brick:Heating_Coil ;
+        brick:hasPoint om:VPS_1 .
+
+    om:VPS_1 a brick:Valve_Position_Sensor.
+
+    om:AHU_1 a brick:AHU ;
+        brick:hasPoint '''om:SA_TEMP_1''', om:MA_TEMP_1.
+
+    om:AHU_2 a brick:AHU ;
+        brick:hasPoint om:MA_TEMP_2, om:SA_TEMP_2 ;
+        brick:feeds om:Zone_2 .
+
+    om:AHU_3 a brick:AHU ;
+        brick:hasPart om:Mixed_Damper ;
+        brick:hasPoint om:SA_TEMP_3, om:MA_TEMP_3 ;
+        brick:feeds om:Zone_3 .
+
+    om:Zone_3 a brick:Zone ;
+        brick:hasPoint om:MA_TEMP_3 .
+
+    om:Fan a brick:Supply_Air_Fan ;
+        brick:hasPoint om:SA_TEMP_3 .
+
+
+    om:AHU_4 a brick:AHU ;
+        brick:hasPoint '''om:MA_TEMP_4''', om:SA_TEMP_4 ;
+        brick:feeds om:Zone_4 .
+
+
+
+    om:CHWC_VLV a brick:Valve_Position_Sensor .
+
+    om:CHWC_VLV_DM a brick:Valve_Position_Command .
+
+    om:Cooling_Coil a brick:Chilled_Water_Coil ;
+        brick:hasPoint om:CHWC_VLV,
+            om:CHWC_VLV_DM .
+
+    om:MA_TEMP a brick:Mixed_Air_Temperature_Sensor ;
+        brick:timeseries [ a ref:TimeseriesReference ;
+            ref:hasTimeseriesId "B_01_EG_RS_EG_01_01_SenDev_TR" ] .           
+    om:MA_TEMP_1 a brick:Mixed_Air_Temperature_Sensor ;
+        brick:timeseries [ a ref:TimeseriesReference ;
+            ref:hasTimeseriesId "B_01_EG_RS_EG_02_01_SenDev_TR" ] .           
+    om:MA_TEMP_2 a brick:Mixed_Air_Temperature_Sensor ;
+        brick:timeseries [ a ref:TimeseriesReference ;
+            ref:hasTimeseriesId "B_01_EG_RS_EG_03_01_HVAC_VavEx_VavExAirFlRel_Present_Value" ] .           
+    om:MA_TEMP_3 a brick:Mixed_Air_Temperature_Sensor .
+    om:MA_TEMP_4 a brick:Mixed_Air_Temperature_Sensor ;
+        brick:timeseries [ a ref:TimeseriesRererence ;
+            ref:hasTimeseriesId "B_01_EG_RS_EG_03_01_SenDev_TR" ] .        
+    om:MA_TEMP_5 a brick:Mixed_Air_Temperature_Sensor .
+    
+
+    om:OA_CFM a brick:Outside_Air_Flow_Sensor .
+
+    om:OA_DMPR a brick:Damper_Position_Sensor .
+
+    om:OA_DMPR_DM a brick:Damper_Position_Command .
+
+    om:OA_TEMP a brick:Outside_Air_Temperature_Sensor .
+
+    om:Outdoor_Air_Damper a brick:Outside_Damper ;
+        brick:hasPoint om:OA_DMPR,
+            om:OA_DMPR_DM .
+
+    om:RA_CFM a brick:Return_Air_Flow_Sensor .
+
+    om:RA_DMPR a brick:Damper_Position_Sensor .
+
+    om:RA_DMPR_DM a brick:Damper_Position_Command .
+
+    om:RA_TEMP a brick:Return_Air_Temperature_Sensor .
+
+    om:RF_CS a brick:Speed_Setpoint .
+
+    om:RF_SPD a brick:Speed_status .
+
+    om:RF_SPD_DM a brick:Fan_On_Off_Status .
+
+    om:RF_WAT a brick:Electrical_Power_Sensor .
+
+    om:Return_Air_Damper a brick:Return_Damper ;
+        brick:hasPoint  om:RA_DMPR, om:RA_DMPR_DM .
+
+    om:Return_Air_Fan a brick:Fan ;
+        brick:hasPoint om:RF_CS,
+            om:RF_SPD,
+            om:RF_SPD_DM,
+            om:RF_WAT .
+
+    om:Mixed_Damper a brick:Mixed_Damper ;
+        brick:hasPoint om:MA_TEMP_3 .
+
+    om:SA_CFM a brick:Supply_Air_Flow_Sensor .
+
+    om:SA_SP a brick:Supply_Air_Static_Pressure_Sensor .
+
+    om:SA_SPSPT a brick:Supply_Air_Static_Pressure_Setpoint .
+
+    om:SA_TEMP a brick:Supply_Air_Temperature_Sensor ;
+        brick:timeseries [ a ref:TimeseriesReference ;
+            ref:hasTimeseriesId "B_A_Ahu01_TSu" ] .
+    om:SA_TEMP_1 a brick:Supply_Air_Temperature_Sensor ;
+        brick:timeseries [ a ref:TimeseriesReference ;
+            ref:hasTimeseriesId "B_01_EG_RS_EG_03_03_SenDev_TR" ] .
+    om:SA_TEMP_2 a brick:Supply_Air_Temperature_Sensor ;
+        brick:timeseries [ a ref:TimeseriesReference ;
+            ref:hasTimeseriesId "B_01_EG_RS_EG_04_01_HVAC_VavEx_VavExAirFlRel_Present_Value" ] .
+    om:SA_TEMP_3 a brick:Supply_Air_Temperature_Sensor .
+    om:SA_TEMP_4 a brick:Supply_Air_Temperature_Sensor ;
+        brick:timeseries [ a ref:TimeseriesReference ;
+            ref:hasTimeseriesId "B_01_EG_RS_EG_04_01_SenDev_TR" ] .
+    om:SA_TEMP_5 a brick:Supply_Air_Temperature_Sensor .
+
+    om:SA_TEMPSPT a brick:Supply_Air_Temperature_Setpoint .
+
+    om:SF_CS a brick:Speed_Setpoint .
+
+    om:SF_SPD a brick:Speed_status .
+
+    om:SF_SPD_DM a brick:Fan_On_Off_Status .
+
+    om:SF_WAT a brick:Electrical_Power_Sensor .
+
+    om:SYS_CTL a brick:Occupancy_Status .
+
+    om:Supply_Air_Fan a brick:Fan ;
+        brick:hasPoint om:SF_CS,
+            om:SF_SPD,
+            om:SF_SPD_DM,
+            om:SF_WAT,
+            om:SA_TEMP  .
+
+    om:ZONE_TEMP_1 a brick:Zone_Air_Temperature_Sensor .
+
+    om:ZONE_TEMP_2 a brick:Zone_Air_Temperature_Sensor .
+
+    om:ZONE_TEMP_3 a brick:Zone_Air_Temperature_Sensor .
+
+    om:ZONE_TEMP_4 a brick:Zone_Air_Temperature_Sensor .
+
+
+    om:Zone_1 a brick:Zone ;
+        brick:hasPoint om:ZONE_TEMP_1, om:SA_TEMP_1, om:MA_TEMP_1 .
+
+    om:Zone_2 a brick:Zone ;
+        brick:hasPoint om:ZONE_TEMP_2, om:SA_TEMP_2, om:MA_TEMP_2 .
+
+
+
+    om:Zone_4 a brick:Zone ;
+        brick:hasPoint om:MA_TEMP_4, om:SA_TEMP_4.
+
+    om:Zone_5 a brick:Zone ;
+        brick:hasPoint om:ZONE_TEMP_5, om:SA_TEMP_5, om:MA_TEMP_5 .
+
